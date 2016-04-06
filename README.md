@@ -44,9 +44,7 @@ Two quick examples show some of the capabilities available to construct and styl
 	td |    | ^b | 5  |
 	```
 
-
-
-	<table style="font-size:6pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px">1.0</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px">2.0</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px; background-color:#808080"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px; background-color:#808080"></td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px">3.0</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px">4.0</td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px; background-color:#808080"></td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px">5.0</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:1px; height:20px; vertical-align:top; width:20px"></td></tr></table>
+As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
 
 The following is a more complex and somewhat contrived table that shows many of the styling techniques. The details are explained in the Specification section below.
 
@@ -75,9 +73,8 @@ The following is a more complex and somewhat contrived table that shows many of 
 	td^1^bt| Average |^^col-avg|^^col-avg|^^col-avg^r|^^col-avg
 	```
 
+As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
 
-
-	<table style="font-size:9pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><th rowspan="2" style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; vertical-align:middle">Location</th><th colspan="2" style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:#ddddff">Day</th><th colspan="2" style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:#bbbbff">Night</th></tr><tr><th style="text-align:center; text-transform:none; font-weight:bold; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:#ddddff">low</th><th style="text-align:center; text-transform:none; font-weight:bold; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:#ddddff">high</th><th style="text-align:center; text-transform:none; font-weight:bold; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:#bbbbff">low</th><th style="text-align:center; text-transform:none; font-weight:bold; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:#bbbbff">high</th></tr><tr><td style="font-weight:500; color:blue; border:1px solid #cccccc; padding:4px 16px 4px 4px; text-align:left; border-top:2px solid #808080">Site #147</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; border-top:2px solid #808080">17.5</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; border-top:2px solid #808080">24.0</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; border-top:2px solid #808080">11.6</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; border-top:2px solid #808080">13.1</td></tr><tr><td style="font-weight:500; color:blue; border:1px solid #cccccc; padding:4px 16px 4px 4px; text-align:left">Site #179</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right">15.9</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right">25.4</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; background-color:#ffcccc">4.1</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right">11.7</td></tr><tr><td style="font-weight:500; color:blue; border:1px solid #cccccc; padding:4px 16px 4px 4px; text-align:left">Site #204</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right">18.2</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right">25.7</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right">10.6</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right">12.9</td></tr><tr><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:4px 16px 4px 4px; text-align:left; background-color:#dddddd; border-top:2px solid #808080">Average</td><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; background-color:#dddddd; border-top:2px solid #808080">17.2</td><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; background-color:#dddddd; border-top:2px solid #808080">25.0</td><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; background-color:#ffcccc; border-top:2px solid #808080">8.8</td><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:4px 4px 4px 16px; text-align:right; background-color:#dddddd; border-top:2px solid #808080">12.6</td></tr></table>
 
 Being able to selectively apply the full range of CSS styling to rows, columns and cells makes it easy to produce visually appealing tables.
 
@@ -166,7 +163,8 @@ Example:
 	```
 
 
-	<table style="font-size:9pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:40%"><tr><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Type</th><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Item</th></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top">Image</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top"><img src="http://www.occasionalenthusiast.com/wp-content/uploads/2016/04/ttimage.jpg"></td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top">Link</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top"><a href="http://www.google.com">Google</a></td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top">Superscript</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top">Hello World<sup>1</sup></td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top">Escaped</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; vertical-align:top">Hello World&lt;sup&gt;1&lt;/sup&gt;</td></tr></table>
+As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
+
 
 The implementation may provide an _implementation option_ (see below) to disable inline HTML.
 
@@ -277,7 +275,7 @@ For both column styles varieties, the last style value can be an asterisk charac
 
 Style column values can be left blank where no style is required and there is no need to specify values for all remaining columns. Remaining columns without a style value are assumed to have no column style.
 
-Some example of column styles:
+Some examples of column styles:
 
 	```
 	th-text-align | "left" | "center" | *
@@ -316,7 +314,7 @@ For example:
 	```
 
 
-	<table style="font-size:20px; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc">&#9814;</td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc">&#9818;</td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td></tr><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td></tr><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc">&#9812;</td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td></tr><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td></tr><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td></tr><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td></tr><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td></tr><tr><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#aaccaa"></td><td style="font-weight:500; color:black; border:none; padding:0px; width:24px; height:24px; text-align:center; vertical-align:middle; background-color:#cceecc"></td></tr></table>
+As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
 
 
 #### Colspan and Rowspan
@@ -332,8 +330,7 @@ For example:
 	td | data1 | data2 | data3 | data4
 	```
 
-	<table style="font-size:9pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">head1</th><th colspan="2" style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:LightSkyBlue">head2</th><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">head4</th></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px">data1</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px">data2</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px">data3</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px">data4</td></tr></table>
-
+As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
 
 Note that the number of columns (i.e. column separators) needs to be reduced to accommodate **colspan** and **rowspan** expansions.
 
@@ -353,7 +350,7 @@ For example:
 	```
 
 
-	<table style="font-size:9pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Item</th><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Q1</th><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Q2</th></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace">#0001</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">$130.00</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">$141.20</td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace">#0002</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">$1,550.50</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">$1,661.24</td></tr></table>
+As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
 
 
 #### Styling Order
@@ -424,7 +421,8 @@ Example:
 	```
 
 
-	<table style="font-size:9pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Item</th><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Male</th><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Female</th><th style="text-align:center; text-transform:none; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px; background-color:#dddddd">Total</th></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:left">Saturday</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">104</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">126</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">230</td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:left">Sunday</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">87</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right">62</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">149</td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:left; background-color:#dddddd">Total</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">191</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">188</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">379</td></tr><tr><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:left; background-color:#dddddd">Average</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">95.50</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">94.00</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; font-family:monospace; text-align:right; background-color:#dddddd">189.50</td></tr></table>
+As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
+
 
 ## Implementation
 
@@ -485,9 +483,84 @@ The code uses a "state" data structure, **state**, that is updated by a **reduce
 
 The main **texttab-html** function and its reduce "dispatching" function are shown below. The term _line_ and _row_ are used interchangeable.
 
-**{{:code :name "texttab-ttbase-0" :line-numbers false}}**
 
-The full code is available [here]().
+```clojure
+(defn- texttab-row
+  "Reduce function for texttab-html. Dispatch different row types and
+  return 'state' updated by the row data."
+  [state row]
+  ;; Note cond order IS important
+  (cond
+    ;;--- Blank line -------------------------------------------
+    (empty? row)
+    state
+    ;;--- Comment line -----------------------------------------
+    (re-find #"^\|" row)
+    state
+    ;;--- Implementation options -------------------------------
+    (re-find #"^\^\^" row)
+    (texttab-options state row)
+    ;;--- Element style ----------------------------------------
+    (re-find #"^(table|tr|th|td)\s+\{.*\}$" row)
+    (texttab-elem-style state row)
+    ;;--- Reference style --------------------------------------
+    (re-find #"^\^[^\^\s]+\s+(\{.*\})$" row)
+    (texttab-ref-style state row)
+    ;;--- Column reference styles ------------------------------
+    (re-find #"^th-\^" row)
+    (texttab-ref-col-style state row :th)
+    ;
+    (re-find #"^td-\^" row)
+    (texttab-ref-col-style state row :td)
+    ;
+    (re-find #"^t\*-\^" row)
+    (let [state (texttab-ref-col-style state row :th)
+          state (texttab-ref-col-style state row :td)]
+      state)
+    ;;--- Column named style -----------------------------------
+    (re-find #"^th-" row)
+    (texttab-named-col-style state row :th)
+    ;
+    (re-find #"^td-" row)
+    (texttab-named-col-style state row :td)
+    ;
+    (re-find #"^t\*-" row)
+    (let [state (texttab-named-col-style state row :th)
+          state (texttab-named-col-style state row :td)]
+      state)
+    ;;--- Data rows --------------------------------------------
+    (re-find #"^th" row)
+    (texttab-row-data state row :th)
+    ;
+    (re-find #"^td" row)
+    (texttab-row-data state row :td)
+    ;;--- Non matching row - ERROR - ignore entire row ---------
+    :else
+    state))
+
+
+(defn texttab-html
+  "Convert line-based texttab content into <table> html."
+  [text styles]
+  (let [text (texttab-escape text)
+        rows (map s/trim (s/split-lines (s/trim text)))
+        col-cnt (texttab-col-cnt rows)   ; no. of table data columns
+        state {:elem-styles styles
+               :ref-styles {}
+               :col-styles {:th (repeat col-cnt {})
+                            :td (repeat col-cnt {})}
+               :col-calcs {:cnts (repeat col-cnt 0)
+                           :sums (repeat col-cnt 0.0)}
+               :col-cnt col-cnt
+               :options {}
+               :html []}
+        state (reduce texttab-row state rows)
+        table-style (get-in state [:elem-styles :table] {})
+        table-attr (style-to-attr table-style)
+        table-html (html [:table table-attr (seq (:html state))])]
+    (texttab-unescape table-html)))
+```
+
 
 #### Limitations and issues
 
@@ -506,10 +579,3 @@ The specification is designed to simplify the application of CSS styles to table
 [3]:	https://github.com/weavejester/hiccup
 [4]:	https://github.com/yogthos/markdown-clj
 
-
-## License
-
-Copyright © 2016 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
