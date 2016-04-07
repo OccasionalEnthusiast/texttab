@@ -158,63 +158,77 @@
         col-s (get-in state [:col-styles tx])
         csums (get-in state [:col-calcs :sums])
         ccnts (get-in state [:col-calcs :cnts])
-        ; Process row variables
-        row-fn (fn [rs cell]
-                 (cond
-                   (= cell "^^row-sum")
-                   (if (zero? (:cnt rs))
-                     (update rs :cols conj "NaN")
-                     (update rs :cols conj (str (:sum rs))))
-                  ;
-                   (= cell "^^row-avg")
-                   (if (zero? (:cnt rs))
-                     (update rs :cols conj "NaN")
-                     (update rs :cols conj (str (/ (:sum rs) (:cnt rs)))))
-                   ;
-                   :else
-                   (if-let [cnum (try (Float. cell) (catch Exception e nil))]
-                     {:cols (conj (:cols rs) (str cnum))
-                      :sum (+ cnum (:sum rs)) :cnt (inc (:cnt rs))}
-                     (update rs :cols conj cell))))
-        rowres (reduce row-fn {:cols [] :sum 0.0 :cnt 0} (rest cols))
-        cdata (:cols rowres)
-        ; Map together the cell text, and column style, sum and count
-        col-fn (fn [ctxt cstyle sum cnt]
-                 (let [[cell refs] (texttab-parse-cell ctxt)
+        ; Build row sums and counts
+        row-fn (fn [rs txt]
+                 (let [[cell refs] (texttab-parse-cell txt)
+                       cell-num (try (Float. cell) (catch Exception e nil))]
+                 (if (nil? cell-num)
+                   {:sums (conj (:sums rs) (:sum rs))
+                    :cnts (conj (:cnts rs) (:cnt rs))
+                    :sum (:sum rs)
+                    :cnt (:cnt rs)}
+                   {:sums (conj (:sums rs) (+ cell-num (:sum rs)))
+                    :cnts (conj (:cnts rs) (inc (:cnt rs)))
+                    :sum (+ cell-num (:sum rs))
+                    :cnt (inc (:cnt rs))})))
+        rowres (reduce row-fn {:sums [] :cnts [] :sum 0.0 :cnt 0} (rest cols))
+        rsums (:sums rowres)
+        rcnts (:cnts rowres)
+        ;
+        cdata (rest cols)
+        ; Map together the cell text, and column style, row/col sums and counts
+        col-fn (fn [txt style csum ccnt rsum rcnt]
+                 (let [[cell refs] (texttab-parse-cell txt)
                        cell-s (texttab-parse-refs state refs)
-                       styles (merge elem-s cstyle row-s cell-s)
+                       styles (merge elem-s style row-s cell-s)
                        attrs (style-to-attr styles)
-                       cnum (try (Float. cell) (catch Exception e nil))
+                       cell-num (try (Float. cell) (catch Exception e nil))
                        fmat (get styles :format "%,.2f")]
                    (cond
                      (= cell "^^col-sum")
-                     (if (zero? cnt)
+                     (if (zero? ccnt)
                        {:html [tx attrs "NaN"] :csum 0.0 :ccnt 0}
-                       {:html [tx attrs (try (format fmat sum)
+                       {:html [tx attrs (try (format fmat csum)
                                           (catch Exception e
-                                            (str sum)))]
+                                            (str csum)))]
                         :csum 0.0 :ccnt 0})
                      ;
                      (= cell "^^col-avg")
-                     (if (zero? cnt)
+                     (if (zero? ccnt)
                        {:html [tx attrs "NaN"] :csum 0.0 :ccnt 0}
-                       {:html [tx attrs (try (format fmat (/ sum cnt))
+                       {:html [tx attrs (try (format fmat (/ csum ccnt))
                                           (catch Exception e
-                                            (str (/ sum cnt))))]
+                                            (str (/ csum ccnt))))]
                         :csum 0.0 :ccnt 0})
                      ;
-                     (nil? cnum)
+                     (= cell "^^row-sum")
+                     (if (zero? rcnt)
+                       {:html [tx attrs "NaN"] :csum 0.0 :ccnt 0}
+                       {:html [tx attrs (try (format fmat rsum)
+                                          (catch Exception e
+                                            (str rsum)))]
+                        :csum rsum :ccnt 1})
+                     ;
+                     (= cell "^^row-avg")
+                     (if (zero? rcnt)
+                       {:html [tx attrs "NaN"] :csum 0.0 :ccnt 0}
+                       {:html [tx attrs (try (format fmat (/ rsum rcnt))
+                                          (catch Exception e
+                                            (str (/ rsum rcnt))))]
+                        :csum (/ rsum rcnt) :ccnt 1})
+                     ;
+                     (nil? cell-num)
                      {:html [tx attrs cell] :csum 0.0 :ccnt 0}
                      ;
                      :else
                      (if-let [fmat (get styles :format)]
-                       {:html [tx attrs (try (format fmat cnum)
+                       {:html [tx attrs (try (format fmat cell-num)
                                           (catch Exception e
-                                            (str cnum)))]
-                        :csum cnum :ccnt 1}
-                       {:html [tx attrs cell] :csum cnum :ccnt 1}))))
+                                            (str cell-num)))]
+                        :csum cell-num :ccnt 1}
+                       {:html [tx attrs cell] :csum cell-num :ccnt 1}))))
         ;
-        colres (map col-fn cdata col-s csums ccnts)
+        colres (map col-fn cdata col-s csums ccnts rsums rcnts)
         ;
         row-sums (extend-vec (vec (map :csum colres)) (:col-cnt state) 0.0)
         row-tots (map + row-sums (get-in state [:col-calcs :sums]))

@@ -473,7 +473,16 @@ One usage approach is to 'bracket' the texttab definitions with a pseudo-HTML ta
 
 Then preprocess the Markdown with code like the following:
 
-**{{:code :name "texttab-usage-0" :line-numbers false}}**
+```clojure
+(let [styles {}
+      content (slurp "mydocument.md")
+      content (clojure.string/replace
+                content
+                #"(?s)<texttab>(.*?)</texttab>"
+                #(texttab-html (% 1) styles))
+      doc-html (md-to-html-string content)]
+  (spit "mydocument.html" doc-html))
+```
 
 As Markdown allows inline HTML, the resulting document is Markdown 'compliant' and can be processed with standard Markdown tools. In this case, the `md-to-html-string` function from the excellent [markdown-clj][4] library.
 
