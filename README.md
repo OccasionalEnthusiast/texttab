@@ -44,7 +44,7 @@ td | 3  |    |    | 4
 td |    | ^b | 5  |
 ```
 
-As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view tables.
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
 
 The following is a more complex and somewhat contrived table that shows many of the styling techniques. The details are explained in the Specification section below.
 
