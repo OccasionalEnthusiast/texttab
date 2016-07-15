@@ -36,10 +36,10 @@
         tt-lst (re-seq #"(?s)<texttab!>(.*?)</texttab!>" text)
         tt-data (map second tt-lst)
         tt-html (map #(core/texttab-html % styles) tt-data)
-        tt-tds (map #(str "<td style=\"border-style: none;\">" % "</td>") tt-html)
+        tt-tds (map #(str "<td style=\"border-style: none; padding: 0px;\">" % "</td>") tt-html)
         sp-col (format "<td style=\"width: %s; border-style: none;\"></td>" (:width opts))
         tt-tr (str "<tr>" (s/join sp-col tt-tds) "</tr>")]
-    (str "<table style=\"border-collapse: collapse; width: auto; border-style: none;\">"
+    (str "<table style=\"border-collapse: collapse; width: auto; border-style: none; margin: 0px;\">"
          tt-tr
          "</table>")))
 
