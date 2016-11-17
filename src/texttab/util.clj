@@ -11,6 +11,7 @@
   {opt1 \"val1\" opt2 \"val2\" ...}
   Current supported options are:
      width - width between tables (default \"20px\")
+     margin - margin around higher table (default \"0px\")
 
   For example: (' = double quotes)
 
@@ -30,18 +31,24 @@
         opt-map (try (read-string opts) (catch Exception e {}))
         opt-map (into {} (for [[k v] opt-map] [(keyword k) v]))
         opt-default {:width "20px"
-                     }
+                     :margin "0px"}
         opts (merge opt-default opt-map)
+        ;
+        styles (assoc-in styles [:table :margin] "0px")
         ;
         tt-lst (re-seq #"(?s)<texttab!>(.*?)</texttab!>" text)
         tt-data (map second tt-lst)
         tt-html (map #(core/texttab-html % styles) tt-data)
         tt-tds (map #(str "<td style=\"border-style: none; padding: 0px;\">" % "</td>") tt-html)
-        sp-col (format "<td style=\"width: %s; border-style: none;\"></td>" (:width opts))
-        tt-tr (str "<tr>" (s/join sp-col tt-tds) "</tr>")]
-    (str "<table style=\"border-collapse: collapse; width: auto; border-style: none; margin: 0px;\">"
-         tt-tr
-         "</table>")))
+        sp-col (format "<td style=\"width: %s; border-style: none; padding: 0px;\"></td>" (:width opts))
+        tt-tr (str "<tr>" (s/join sp-col tt-tds) "</tr>")
+        ;
+        tab-styles {:border-collapse "collapse"
+                    :width "auto"
+                    :border-style "none"
+                    :margin (:margin opts)}
+        tab-style-str (s/join "; " (for [[k v] tab-styles] (str (name k) ":" v)))]
+    (format "<table style=\"%s\">%s</table>" tab-style-str tt-tr)))
 
 
 (defn tt-values
