@@ -17,12 +17,14 @@
       attrs
       (assoc attrs :style style-str))))
 
+
 (defn- extend-vec
   "Extend a vec to the supplied length using the pad value"
   [v len pad]
   (if (>= (count v) len)
     v
     (extend-vec (conj v pad) len pad)))
+
 
 (defn- extend-style
   "Add entries to the end of the style vector 'sv' until it's 'len' long.
@@ -134,15 +136,17 @@
   (cond
     ; Blank case
     (= ctxt "") ["" ""]
+    ; Rowspan/colspan placeholder case
+    (= ctxt "^") ["^" ""]
     ; Variable case
     (s/starts-with? ctxt "^^")
-    (let [parts (re-find #"^(\^\^[^\^\s]+)\s*(\^.*)$" ctxt)]
+    (let [parts (re-find #"^(\^\^[^\^\s]+)\s*(\^.+)$" ctxt)]
       (if (nil? parts)
         [ctxt ""]
         [(parts 1) (str (parts 2))]))
     ; Content case
     :else
-    (let [parts (re-find #"^(.*?)(\^.*)$" ctxt)]
+    (let [parts (re-find #"^(.*?)(\^.+)$" ctxt)]
       (if (nil? parts)
         [ctxt ""]
         [(parts 1) (str (parts 2))]))))
@@ -185,6 +189,9 @@
                        cell-num (try (Float. cell) (catch Exception e nil))
                        fmat (get styles :format "%,.2f")]
                    (cond
+                     (= cell "^")                 ; row/colspan placeholder (these cells are removed)
+                     {:html [] :csum 0.0 :ccnt 0}
+                     ;
                      (= cell "^^col-sum")
                      (if (zero? ccnt)
                        {:html [tx attrs "NaN"] :csum 0.0 :ccnt 0}
@@ -239,7 +246,8 @@
         state (assoc-in state [:col-calcs :cnts] row-tots)
         ;
         tr-attr (get-in state [:elem-styles :tr] {})
-        state (update-in state [:html] conj [:tr tr-attr (map :html colres)])]
+        col-elems (remove empty? (map :html colres))      ; remove row/colspan placeholders
+        state (update-in state [:html] conj [:tr tr-attr col-elems])]
     state))
 
 
@@ -328,3 +336,4 @@
         table-attr (style-to-attr table-style)
         table-html (html [:table table-attr (seq (:html state))])]
     (texttab-unescape table-html)))
+
