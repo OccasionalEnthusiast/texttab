@@ -1,4 +1,4 @@
-(defproject texttab "0.1.0"
+(defproject texttab "0.1.1"
   :description "Create high quality HTML tables using only text layout"
   :url "https://http://www.occasionalenthusiast.com"
   :license {:name "Eclipse Public License"
