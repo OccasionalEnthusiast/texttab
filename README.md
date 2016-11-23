@@ -13,7 +13,7 @@ There are many minor irritations that blight the perfect table:
 * column or row spanning is required
 * cell numeric format is inconsistent
 
-These problems are exacerbated when you don't have full control over the table as it is rendered in a framework with its own defaults (e.g. themes) or where it is difficult to modify the associated CSS directly.
+These problems are exacerbated when you don't have full control over the table layout, such as when it is rendered in a framework with its own defaults (e.g. themes), or when it is difficult to modify the associated CSS directly.
 
 The following is a proposed _texttab_ specification to define and style a table using a text only format. A basic Clojure implementation is also provided.
 
@@ -33,52 +33,50 @@ The main features include:
 
 Two quick examples show some of the capabilities available to construct and style tables. The plain text code used to define the tables is shown first, followed by the resulting table as rendered by the browser.
 
-```
-table {width "auto" font-size "6pt"}
-td {height "20px" padding "1px" vertical-align "top"}
-^b {background-color "#808080"}
-td-width | "20px" | *
-td | 1  |    | 2  |
-td |    | ^b |    | ^b
-td | 3  |    |    | 4
-td |    | ^b | 5  |
-```
+	```
+	table {width "auto" font-size "6pt"}
+	td {height "20px" padding "1px" vertical-align "top"}
+	^b {background-color "#808080"}
+	td-width | "20px" | *
+	td | 1  |    | 2  |
+	td |    | ^b |    | ^b
+	td | 3  |    |    | 4
+	td |    | ^b | 5  |
+	```
 
-**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
-
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/high-quality-html-tables-using-text-only-layouts/) to view the resulting table.
 The following is a more complex and somewhat contrived table that shows many of the styling techniques. The details are explained in the Specification section below.
 
-```
-table {width "auto"}
-^p-r {padding "4px 16px 4px 4px"}
-^p-l {padding "4px 4px 4px 16px"}
-| Longer style definitions, like ^1 below, can be split
-| by repeating the definition as the styles are merged
-^1 {background-color "#dddddd" font-weight "bold" format "%.1f"}
-^1 {color black}
-^bt {border-top "2px solid #808080"}
-^lb {background-color "#ddddff"}
-^db {background-color "#bbbbff"}
-^r {background-color "#ffcccc"}
-^c2 {colspan "2"}
-^r2 {rowspan "2" vertical-align "middle"}
-td-text-align | "left" | "right" | *
-td-color | "blue"
-td-^ |    ^p-r   | ^p-l | *
-th   |Location^r2|  Day^c2^lb  |  Night^c2^db
-th^1 |            low^lb |high^lb|low^db|high^db
-td^bt| Site #147 |  17.5 |  24.0 |  11.6 | 13.1
-td   | Site #179 |  15.9 |  25.4 |  4.1^r| 11.7
-td   | Site #204 |  18.2 |  25.7 |  10.6 | 12.9
-td^1^bt| Average |^^col-avg|^^col-avg|^^col-avg^r|^^col-avg
-```
+	```
+	table {width "auto"}
+	^p-r {padding "4px 16px 4px 4px"}
+	^p-l {padding "4px 4px 4px 16px"}
+	| Longer style definitions, like ^1 below, can be split
+	| by repeating the definition as the styles are merged
+	^1 {background-color "#dddddd" font-weight "bold" format "%.1f"}
+	^1 {color black}
+	^bt {border-top "2px solid #808080"}
+	^lb {background-color "#ddddff"}
+	^db {background-color "#bbbbff"}
+	^r {background-color "#ffcccc"}
+	^c2 {colspan "2"}
+	^r2 {rowspan "2" vertical-align "middle"}
+	td-text-align | "left" | "right" | *
+	td-color | "blue"
+	td-^ |    ^p-r   | ^p-l | *
+	th   |Location^r2| Day^c2^lb | ^ |Night^c2^db| ^
+	th^1 |    ^      |low^lb |high^lb|low^db|high^db
+	td^bt| Site #147 |  17.5 |  24.0 |  11.6 | 13.1
+	td   | Site #179 |  15.9 |  25.4 |  4.1^r| 11.7
+	td   | Site #204 |  18.2 |  25.7 |  10.6 | 12.9
+	td^1^bt| Average |^^col-avg|^^col-avg|^^col-avg^r|^^col-avg
+	```
 
-**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
-
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/high-quality-html-tables-using-text-only-layouts/) to view the resulting table.
 
 Being able to selectively apply the full range of CSS styling to rows, columns and cells makes it easy to produce visually appealing tables.
 
-## Texttab Specification (Version 1.0)
+## Texttab Specification (Version 1.1)
 
 The texttab specification describes the data and styling for a web-based (HTML and CSS) table definition in a textual format. The specification is intended to be converted from text to HTML table elements and inline CSS styles suitable for rendering by a web browser.
 
@@ -107,19 +105,19 @@ The data definitions specify the _row type_ followed by the cell values that mak
 
 Row data is define as:
 
-```
-th | data1 | data2 ...
-td | data1 | data2 ...
-```
+	```
+	th | data1 | data2 ...
+	td | data1 | data2 ...
+	```
 
 For example:
 
-```
-th | Team      | Played | Won | Score
-td | Blue Mist | 4      | 1   | 34.6
-td | Wayne's Warriors| 3 | 3 | 103.5
-td | Rabbits   | 3      | 0    | 0.0
-```
+	```
+	th | Team      | Played | Won | Score
+	td | Blue Mist | 4      | 1   | 34.6
+	td | Wayne's Warriors| 3 | 3 | 103.5
+	td | Rabbits   | 3      | 0    | 0.0
+	```
 
 There is no requirement to align the data columns other than to aid readability.
 
@@ -129,17 +127,17 @@ Blank cells are represented by zero or more spaces. A row ending with a vertical
 
 Some examples of blank cells are shown below (the first two rows are identical, and all rows have four table columns).
 
-```
-th | a |   | c  | d
-td |a|| c|d
-td |   | b | c |
-```
+	```
+	th | a |   | c  | d
+	td |a|| c|d
+	td |   | b | c |
+	```
 
 Blank cells can contain one or more _reference styles_ (see below). The following four cells are all blank but two have associated styles.
 
-```
-td |   | ^1 | ^1^bg |
-```
+	```
+	td |   | ^1 | ^1^bg |
+	```
 
 
 #### Inline HTML elements
@@ -152,19 +150,18 @@ The specification allows inline (non-escaped) HTML as cell content. Inline HTML 
 
 Example:
 
-```
-table {width "40%"}
-td {vertical-align "top"}
-th | Type | Item
-td | Image | <img src="http://www.occasionalenthusiast.com/wp-content/uploads/2016/04/ttimage.jpg">
-td | Link | <a href="http://www.google.com">Google</a>
-td | Superscript | Hello World<sup>1</sup>
-td | Escaped | Hello World\<sup\>1\</sup\>
-```
+	```
+	table {width "40%"}
+	td {vertical-align "top"}
+	th | Type | Item
+	td | Image | <img src="http://www.occasionalenthusiast.com/wp-content/uploads/2016/04/ttimage.jpg">
+	td | Link | <a href="http://www.google.com">Google</a>
+	td | Superscript | Hello World<sup>1</sup>
+	td | Escaped | Hello World\<sup\>1\</sup\>
+	```
 
 
-**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
-
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/high-quality-html-tables-using-text-only-layouts/) to view the resulting table.
 
 The implementation may provide an _implementation option_ (see below) to disable inline HTML.
 
@@ -184,10 +181,10 @@ All styles aggregate and later style definitions replace (override) earlier styl
 
 Element styles apply to the standard HTML table elements and are _global_ in the sense they apply across the whole table. They are defined as:
 
-```
-<element> {style1 "value1" style2 "value2" ...}
-<element> {style1 "value1", style2 "value2", ...}
-```
+	```
+	<element> {style1 "value1" style2 "value2" ...}
+	<element> {style1 "value1", style2 "value2", ...}
+	```
 
 `<element>` is one of the following four HTML table element names: **table**, **tr**, **th** and **td**.
 
@@ -204,40 +201,40 @@ For example:
 
 Reference styling defines a style that can be used to style rows, columns and cells. A reference style is defined by:
 
-```
-^<style-ref> {style1 "value1" style2 "value2" ... }
-^<style-ref> {style1 "value1", style2 "value2", ... }
-```
+	```
+	^<style-ref> {style1 "value1" style2 "value2" ... }
+	^<style-ref> {style1 "value1", style2 "value2", ... }
+	```
 
 `<style-ref>` can be any case-sensitive string of characters (at least a-z, A-Z, 0-9, \_ and -) excluding whitespace and the caret (`^`) character. Generally it is a short string, or a single character, as it is applied by appending `^<style-ref>` to the styling target.
 
 To style an entire data row with a reference style, append it to the row type at the start of the row:
 
-```
-th^<style-ref> | data1 | data2 ...
-td^<style-ref1>^<style-ref2> | data1 | data2 ...
-```
+	```
+	th^<style-ref> | data1 | data2 ...
+	td^<style-ref1>^<style-ref2> | data1 | data2 ...
+	```
 
 Cell styling is similar but the style reference is appended to the cell data:
 
-```
-th | data1^<style-ref> | data2 ...
-td | data1 | data2^<style-ref1>^<style-ref2> ...
-```
+	```
+	th | data1^<style-ref> | data2 ...
+	td | data1 | data2^<style-ref1>^<style-ref2> ...
+	```
 
 In both cases, multiple styles can be applied to the same target by appending additional reference styles as required.
 
 Examples:
 
-```
-^1 {background-color "#eeeeee"}
-^2 {color "red", font-weight "bold"}
-^bd {border "2px solid #cc0000"}
+	```
+	^1 {background-color "#eeeeee"}
+	^2 {color "red", font-weight "bold"}
+	^bd {border "2px solid #cc0000"}
 
-th^1^2| data1 | data2 | data3
-td^1 | data1 | data2^2 | data3
-td   | data1^2^bd | data2 | data3^bd
-```
+	th^1^2| data1 | data2 | data3
+	td^1 | data1 | data2^2 | data3
+	td   | data1^2^bd | data2 | data3^bd
+	```
 
 Column styling using reference styles is discussed in the next section.
 
@@ -247,11 +244,11 @@ Column styling applies to all the cells in a particular table column for the row
 
 Named column styles are defined by:
 
-```
-th-<style-name> | "value1" | "value2" ...
-td-<style-name> | "value1" | "value2" ...
-t*-<style-name> | "value1" | "value2" ...
-```
+	```
+	th-<style-name> | "value1" | "value2" ...
+	td-<style-name> | "value1" | "value2" ...
+	t*-<style-name> | "value1" | "value2" ...
+	```
 
 The styles starting with "th-" only apply to **th** data rows, while those starting with "td-" only apply to **td** data rows. Column styles starting with "t\*" apply to all rows regardless of their type.
 
@@ -259,17 +256,17 @@ Named styles are particularly useful when many columns require a different value
 
 Reference column styles are defined in a similar way only using defined reference styles:
 
-```
-th-^ | ^<style-ref1> | ^<style-ref2> ...
-td-^ | ^<style-ref1> | ^<style-ref2> ...
-t*-^ | ^<style-ref1> | ^<style-ref2> ...
-```
+	```
+	th-^ | ^<style-ref1> | ^<style-ref2> ...
+	td-^ | ^<style-ref1> | ^<style-ref2> ...
+	t*-^ | ^<style-ref1> | ^<style-ref2> ...
+	```
 
 As with named styles the reference styles apply to **th**, **td** or both respectively. Multiple reference styles can be used in one column definition:
 
-```
-th-^ | ^<style-ref1>^<style-ref2> | ^<style-ref2> ...
-```
+	```
+	th-^ | ^<style-ref1>^<style-ref2> | ^<style-ref2> ...
+	```
 
 For both column styles varieties, the last style value can be an asterisk character (\*) to denote that the previous style value/reference will be propagated across all the remaining columns.
 
@@ -277,43 +274,45 @@ Style column values can be left blank where no style is required and there is no
 
 Some examples of column styles:
 
-```
-th-text-align | "left" | "center" | *
-td-text-align | "left" | | | "right"
-t*-color | "blue"
-td-^ | ^1 |  |  | ^2 | ^1^3
-td-^ | ^left^bold | ^right | *
-```
+	```
+	th-text-align | "left" | "center" | *
+	td-text-align | "left" | | | "right"
+	t*-color | "blue"
+	td-^ | ^1 |  |  | ^2 | ^1^3
+	td-^ | ^left^bold | ^right | *
+	```
 
 Style rows can be intermingled with data rows to change the column styling throughout the table.
 
 For example:
 
-```
-table {font-size "20px"}
-td {width "24px" height "24px" text-align "center" vertical-align "middle"}
-td {padding "0px" border "none"}
-^1 {background-color "#cceecc"}
-^2 {background-color "#aaccaa"}
-td-^|^1|^2|^1|^2|^1|^2|^1|^2
-td  |&#9814;|  |  |  |&#9818;|  |  |
-td-^|^2|^1|^2|^1|^2|^1|^2|^1
-td  |  |  |  |  |  |  |  |
-td-^|^1|^2|^1|^2|^1|^2|^1|^2
-td  |  |  |  |  |&#9812;|  |  |
-td-^|^2|^1|^2|^1|^2|^1|^2|^1
-td  |  |  |  |  |  |  |  |
-td-^|^1|^2|^1|^2|^1|^2|^1|^2
-td  |  |  |  |  |  |  |  |
-td-^|^2|^1|^2|^1|^2|^1|^2|^1
-td  |  |  |  |  |  |  |  |
-td-^|^1|^2|^1|^2|^1|^2|^1|^2
-td  |  |  |  |  |  |  |  |
-td-^|^2|^1|^2|^1|^2|^1|^2|^1
-td  |  |  |  |  |  |  |  |
-```
+	```
+	table {font-size "20px"}
+	td {width "24px" height "24px" text-align "center" vertical-align "middle"}
+	td {padding "0px" border "none"}
+	^1 {background-color "#cceecc"}
+	^2 {background-color "#aaccaa"}
+	td-^|^1|^2|^1|^2|^1|^2|^1|^2
+	td  |&#9814;|  |  |  |&#9818;|  |  |
+	td-^|^2|^1|^2|^1|^2|^1|^2|^1
+	td  |  |  |  |  |  |  |  |
+	td-^|^1|^2|^1|^2|^1|^2|^1|^2
+	td  |  |  |  |  |&#9812;|  |  |
+	td-^|^2|^1|^2|^1|^2|^1|^2|^1
+	td  |  |  |  |  |  |  |  |
+	td-^|^1|^2|^1|^2|^1|^2|^1|^2
+	td  |  |  |  |  |  |  |  |
+	td-^|^2|^1|^2|^1|^2|^1|^2|^1
+	td  |  |  |  |  |  |  |  |
+	td-^|^1|^2|^1|^2|^1|^2|^1|^2
+	td  |  |  |  |  |  |  |  |
+	td-^|^2|^1|^2|^1|^2|^1|^2|^1
+	td  |  |  |  |  |  |  |  |
+	```
 
-**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
+
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/high-quality-html-tables-using-text-only-layouts/) to view the resulting table.
+
 
 #### Colspan and Rowspan
 
@@ -321,16 +320,18 @@ CSS does not directly support **colspan** and **rowspan** but for this specifica
 
 For example:
 
-```
-^cs2 {colspan "2" background-color "LightSkyBlue"}
+	```
+	^cs2 {colspan "2" background-color "LightSkyBlue"}
 
-th | data1 | data2^cs2 | data3
-td | data1 | data2 | data3 | data4
-```
+	t*-background-color | | | | "Thistle"
+	td-width | "50px" | *
+	th | head1 | head2^cs2 | ^ | head4
+	td | data1 | data2 | data3 | data4
+	```
 
-**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/high-quality-html-tables-using-text-only-layouts/) to view the resulting table.
 
-Note that the number of columns (i.e. column separators) needs to be reduced to accommodate **colspan** and **rowspan** expansions.
+A single carat (`^`) character is used to indicate a "placeholder" for cells that will be overlaid by a row or column span. These cells are deleted from the row once styles are assigned to make space for the span. The placeholder cells maintain the integrity of the table grid structure so that column styles and calculations work as expected, as in the above example.
 
 #### Numeric Formatting
 
@@ -338,17 +339,17 @@ In a similar manner to **colspan** and **rowspan**, the non-CSS style **format**
 
 For example:
 
-```
-td {font-family "monospace"}
-^m {format "$%,.2f" text-align "right"}
-td-^|       | ^m    | *
-th  | Item | Q1 | Q2
-td  | #0001 | 130 | 141.2
-td  | #0002 | 1550.50 | 1661.236
-```
+	```
+	td {font-family "monospace"}
+	^m {format "$%,.2f" text-align "right"}
+	td-^|       | ^m    | *
+	th  | Item | Q1 | Q2
+	td  | #0001 | 130 | 141.2
+	td  | #0002 | 1550.50 | 1661.236
+	```
 
 
-**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/high-quality-html-tables-using-text-only-layouts/) to view the resulting table.
 
 
 #### Styling Order
@@ -365,28 +366,28 @@ The style for each cell is an aggregation of the cell's element, column, row and
 
 Lines starting with a vertical bar (|) are treated as comments and are ignored.
 
-```
-| I'm a comment
-|me too ....
-```
+	```
+	| I'm a comment
+	|me too ....
+	```
 
 ### Implementation options
 
 Lines starting with two caret characters (^^) introduce implementation specific options or flags. The format is similar to the element style definitions - key and value pairs within braces - but without the element name.
 
-```
-^^ {option1 "value1" option2 "value2" ... }
-^^ {option1 "value1", option2 "value2", ... }
-```
+	```
+	^^ {option1 "value1" option2 "value2" ... }
+	^^ {option1 "value1", option2 "value2", ... }
+	```
 
 The options and values follow the CSS style syntax but they are entirely specific to the implementation.
 
 Examples:
 
-```
-^^ {debug "true", type "error"}
-^^ {html-escape "yes"}
-```
+	```
+	^^ {debug "true", type "error"}
+	^^ {html-escape "yes"}
+	```
 
 ### Special cell variables (optional)
 
@@ -405,22 +406,27 @@ Care needs to be taken if the data contains values that 'look' numeric but are n
 
 Example:
 
-```
-td {font-family "monospace" format "%.0f"}
-^1 {format "%.2f"}
-^b {background-color "#dddddd"}
-td-text-align|"left"|"right"|*
-t*-^  |          |      |        | ^b
-th    | Item     | Male | Female | Total
-td    | Saturday |  104 |  126   | ^^row-sum
-td    | Sunday   |   87 |   62   | ^^row-sum
-td^b  | Total    |^^col-sum|^^col-sum|^^col-sum
-td^1^b| Average  |^^col-avg|^^col-avg|^^col-avg
-```
+	```
+	td {font-family "monospace" format "%.0f"}
+	^1 {format "%.2f"}
+	^b {background-color "#dddddd"}
+	td-text-align|"left"|"right"|*
+	t*-^  |          |      |        | ^b
+	th    | Item     | Male | Female | Total
+	td    | Saturday |  104 |  126   | ^^row-sum
+	td    | Sunday   |   87 |   62   | ^^row-sum
+	td^b  | Total    |^^col-sum|^^col-sum|^^col-sum
+	td^1^b| Average  |^^col-avg|^^col-avg|^^col-avg
+	```
 
 
-**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/?p=88) to view the resulting table.
+**Note**: As GitHub aggressively sanitises inline HTML, table output will not display here. Please see [blog entry](http://www.occasionalenthusiast.com/high-quality-html-tables-using-text-only-layouts/) to view the resulting table.
 
+### Change Log
+
+List of texttab specification changes:
+
+<table style="font-size:9pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><th style="text-align:center; text-transform:none; letter-spacing:normal; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Version</th><th style="text-align:left; text-transform:none; letter-spacing:normal; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Change</th></tr><tr><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:center">1.0</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:left">Initial version</td></tr><tr><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:center">1.1</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:left">Added single "<code>&#94;</code>" as row/colspan cell placeholder to maintain the table "grid" integrity</td></tr></table>
 
 ## Implementation
 
@@ -437,50 +443,41 @@ One public function **texttab-html** is available that takes two arguments:
 
 An example of the base style map is shown below, but it can simply be an empty map ({}) if no initial element styling is needed.
 
-```
-{:table {:border-collapse "collapse"}
-:th {:text-transform "none"}}
-```
+	```
+	{:table {:border-collapse "collapse"}
+	 :th {:text-transform "none"}}
+	```
 
 The function returns an HTML **table** definition.
 
-```
-(texttab-html "td|a|b|c" {})
-;=> <table><tr><td>a</td><td>b</td><td>c</td></tr></table>
+	```
+	(texttab-html "td|a|b|c" {})
+	;=> <table><tr><td>a</td><td>b</td><td>c</td></tr></table>
 
-(texttab-html "^1 {x \"xyz\"}\ntd|a|b^1|c" {})
-;=> <table><tr><td>a</td><td style="x:xyz">b</td><td>c</td></tr></table>
-```
+	(texttab-html "^1 {x \"xyz\"}\ntd|a|b^1|c" {})
+	;=> <table><tr><td>a</td><td style="x:xyz">b</td><td>c</td></tr></table>
+	```
 
 ### Usage
 
 One usage approach is to 'bracket' the texttab definitions with a pseudo-HTML tag `<texttab>` and `</texttab>` inside a Markdown document as follows:
 
-```
-## My Markdown document
-:              (Markdown code)
-<texttab>
-:              (texttab definitions)
-</texttab>
-:
-<texttab>
-:
-</texttab>
-:
-```
+	```
+	## My Markdown document
+	:              (Markdown code)
+	<texttab>
+	:              (texttab definitions)
+	</texttab>
+	:
+	<texttab>
+	:
+	</texttab>
+	:
+	```
 
 Then preprocess the Markdown with code like the following:
 
-```clojure
-(let [styles {}
-      content (slurp "mydocument.md")
-      content (clojure.string/replace
-                content
-                #"(?s)<texttab>(.*?)</texttab>"
-                #(texttab-html (% 1) styles))
-      doc-html (md-to-html-string content)]
-  (spit "mydocument.html" doc-html))
-```
+**{{:code :name "texttab-usage-0" :line-numbers false}}**
 
 As Markdown allows inline HTML, the resulting document is Markdown 'compliant' and can be processed with standard Markdown tools. In this case, the `md-to-html-string` function from the excellent [markdown-clj][4] library.
 
@@ -490,84 +487,9 @@ The code uses a "state" data structure, **state**, that is updated by a **reduce
 
 The main **texttab-html** function and its reduce "dispatching" function are shown below. The term _line_ and _row_ are used interchangeable.
 
+**{{:code :name "texttab-ttbase-0" :line-numbers false}}**
 
-```clojure
-(defn- texttab-row
-  "Reduce function for texttab-html. Dispatch different row types and
-  return 'state' updated by the row data."
-  [state row]
-  ;; Note cond order IS important
-  (cond
-    ;;--- Blank line -------------------------------------------
-    (empty? row)
-    state
-    ;;--- Comment line -----------------------------------------
-    (re-find #"^\|" row)
-    state
-    ;;--- Implementation options -------------------------------
-    (re-find #"^\^\^" row)
-    (texttab-options state row)
-    ;;--- Element style ----------------------------------------
-    (re-find #"^(table|tr|th|td)\s+\{.*\}$" row)
-    (texttab-elem-style state row)
-    ;;--- Reference style --------------------------------------
-    (re-find #"^\^[^\^\s]+\s+(\{.*\})$" row)
-    (texttab-ref-style state row)
-    ;;--- Column reference styles ------------------------------
-    (re-find #"^th-\^" row)
-    (texttab-ref-col-style state row :th)
-    ;
-    (re-find #"^td-\^" row)
-    (texttab-ref-col-style state row :td)
-    ;
-    (re-find #"^t\*-\^" row)
-    (let [state (texttab-ref-col-style state row :th)
-          state (texttab-ref-col-style state row :td)]
-      state)
-    ;;--- Column named style -----------------------------------
-    (re-find #"^th-" row)
-    (texttab-named-col-style state row :th)
-    ;
-    (re-find #"^td-" row)
-    (texttab-named-col-style state row :td)
-    ;
-    (re-find #"^t\*-" row)
-    (let [state (texttab-named-col-style state row :th)
-          state (texttab-named-col-style state row :td)]
-      state)
-    ;;--- Data rows --------------------------------------------
-    (re-find #"^th" row)
-    (texttab-row-data state row :th)
-    ;
-    (re-find #"^td" row)
-    (texttab-row-data state row :td)
-    ;;--- Non matching row - ERROR - ignore entire row ---------
-    :else
-    state))
-
-
-(defn texttab-html
-  "Convert line-based texttab content into <table> html."
-  [text styles]
-  (let [text (texttab-escape text)
-        rows (map s/trim (s/split-lines (s/trim text)))
-        col-cnt (texttab-col-cnt rows)   ; no. of table data columns
-        state {:elem-styles styles
-               :ref-styles {}
-               :col-styles {:th (repeat col-cnt {})
-                            :td (repeat col-cnt {})}
-               :col-calcs {:cnts (repeat col-cnt 0)
-                           :sums (repeat col-cnt 0.0)}
-               :col-cnt col-cnt
-               :options {}
-               :html []}
-        state (reduce texttab-row state rows)
-        table-style (get-in state [:elem-styles :table] {})
-        table-attr (style-to-attr table-style)
-        table-html (html [:table table-attr (seq (:html state))])]
-    (texttab-unescape table-html)))
-```
-
+The full code is available [here][5].
 
 #### Limitations and issues
 
@@ -585,4 +507,4 @@ The specification is designed to simplify the application of CSS styles to table
 [2]:	http://clojure.org
 [3]:	https://github.com/weavejester/hiccup
 [4]:	https://github.com/yogthos/markdown-clj
-
+[5]:	https://github.com/OccasionalEnthusiast/texttab
