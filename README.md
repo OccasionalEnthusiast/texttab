@@ -426,7 +426,11 @@ Example:
 
 List of texttab specification changes:
 
-<table style="font-size:9pt; font-family:sans-serif; border-collapse:collapse; border:2px solid #cccccc; line-height:1.2; width:auto"><tr><th style="text-align:center; text-transform:none; letter-spacing:normal; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Version</th><th style="text-align:left; text-transform:none; letter-spacing:normal; font-weight:700; color:black; border:1px solid #cccccc; line-height:1.2; padding:3px 4px 3px 4px">Change</th></tr><tr><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:center">1.0</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:left">Initial version</td></tr><tr><td style="font-weight:bold; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:center">1.1</td><td style="font-weight:500; color:black; border:1px solid #cccccc; padding:3px 4px 3px 4px; text-align:left">Added single "<code>&#94;</code>" as row/colspan cell placeholder to maintain the table "grid" integrity</td></tr></table>
+<table>
+<tr><th>Version</th><th>Change</th></tr>
+<tr><td >1.0</td><td>Initial version</td></tr>
+<tr><td>1.1</td><td>Added single "&#94;" as row/colspan cell placeholder to maintain the table "grid" integrity</td></tr>
+</table>
 
 ## Implementation
 
@@ -477,7 +481,16 @@ One usage approach is to 'bracket' the texttab definitions with a pseudo-HTML ta
 
 Then preprocess the Markdown with code like the following:
 
-**{{:code :name "texttab-usage-0" :line-numbers false}}**
+```clojure
+(let [styles {}
+      content (slurp "mydocument.md")
+      content (clojure.string/replace
+                content
+                #"(?s)<texttab>(.*?)</texttab>"
+                #(texttab-html (% 1) styles))
+      doc-html (md-to-html-string content)]
+  (spit "mydocument.html" doc-html))
+```
 
 As Markdown allows inline HTML, the resulting document is Markdown 'compliant' and can be processed with standard Markdown tools. In this case, the `md-to-html-string` function from the excellent [markdown-clj][4] library.
 
@@ -487,7 +500,83 @@ The code uses a "state" data structure, **state**, that is updated by a **reduce
 
 The main **texttab-html** function and its reduce "dispatching" function are shown below. The term _line_ and _row_ are used interchangeable.
 
-**{{:code :name "texttab-ttbase-0" :line-numbers false}}**
+```clojure
+(defn- texttab-row
+  "Reduce function for texttab-html. Dispatch different row types and
+  return 'state' updated by the row data."
+  [state row]
+  ;; Note cond order IS important
+  (cond
+    ;;--- Blank line -------------------------------------------
+    (empty? row)
+    state
+    ;;--- Comment line -----------------------------------------
+    (re-find #"^\|" row)
+    state
+    ;;--- Implementation options -------------------------------
+    (re-find #"^\^\^" row)
+    (texttab-options state row)
+    ;;--- Element style ----------------------------------------
+    (re-find #"^(table|tr|th|td)\s+\{.*\}$" row)
+    (texttab-elem-style state row)
+    ;;--- Reference style --------------------------------------
+    (re-find #"^\^[^\^\s]+\s+(\{.*\})$" row)
+    (texttab-ref-style state row)
+    ;;--- Column reference styles ------------------------------
+    (re-find #"^th-\^" row)
+    (texttab-ref-col-style state row :th)
+    ;
+    (re-find #"^td-\^" row)
+    (texttab-ref-col-style state row :td)
+    ;
+    (re-find #"^t\*-\^" row)
+    (let [state (texttab-ref-col-style state row :th)
+          state (texttab-ref-col-style state row :td)]
+      state)
+    ;;--- Column named style -----------------------------------
+    (re-find #"^th-" row)
+    (texttab-named-col-style state row :th)
+    ;
+    (re-find #"^td-" row)
+    (texttab-named-col-style state row :td)
+    ;
+    (re-find #"^t\*-" row)
+    (let [state (texttab-named-col-style state row :th)
+          state (texttab-named-col-style state row :td)]
+      state)
+    ;;--- Data rows --------------------------------------------
+    (re-find #"^th" row)
+    (texttab-row-data state row :th)
+    ;
+    (re-find #"^td" row)
+    (texttab-row-data state row :td)
+    ;;--- Non matching row - ERROR - ignore entire row ---------
+    :else
+    state))
+
+
+(defn texttab-html
+  "Convert line-based texttab content into <table> html."
+  [text styles]
+  (let [text (texttab-escape text)
+        rows (map s/trim (s/split-lines (s/trim text)))
+        col-cnt (texttab-col-cnt rows)   ; no. of table data columns
+        state {:elem-styles styles
+               :ref-styles {}
+               :col-styles {:th (repeat col-cnt {})
+                            :td (repeat col-cnt {})}
+               :col-calcs {:cnts (repeat col-cnt 0)
+                           :sums (repeat col-cnt 0.0)}
+               :col-cnt col-cnt
+               :options {}
+               :html []}
+        state (reduce texttab-row state rows)
+        table-style (get-in state [:elem-styles :table] {})
+        table-attr (style-to-attr table-style)
+        table-html (html [:table table-attr (seq (:html state))])]
+    (texttab-unescape table-html)))
+
+```
 
 The full code is available [here][5].
 
@@ -502,6 +591,14 @@ Although various markup schemes have support for tables, they are often difficul
 By tapping directly into CSS styles, it is possible to enhance the base styling to suit individual tables with a high degree of flexibly and precision.
 
 The specification is designed to simplify the application of CSS styles to tables by providing ways to target table HTML elements, rows, columns and cells as individual items. This allows the generation of high quality tables with simple and minimal textual input.
+
+## License
+
+Copyright © 2016 Kim Wishart
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
+
 
 [1]:	https://daringfireball.net/projects/markdown/
 [2]:	http://clojure.org
